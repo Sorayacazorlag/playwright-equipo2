@@ -30,7 +30,7 @@ def test_form_with_required_name_field_left_empty(page: Page):
     print ("clicks send")
     page.get_by_role("button", name="Enviar Mensaje").click()
 
-    print ("user should see the error message 'message is mandatory'")
+    print ("user should see the error message 'name is mandatory'")
     expect(page.get_by_text("El nombre es obligatorio")).to_be_visible()
 
 
