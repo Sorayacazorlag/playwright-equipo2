@@ -25,7 +25,6 @@ def test_form_with_required_name_field_left_empty(page: Page):
     print ("fills required message with 'test mesage'")
     page.get_by_role("textbox", name="Mensaje *").fill("test message")
     page.get_by_role("textbox", name="Nombre *").click()
-    page.get_by_role("textbox", name="Nombre *").click()
 
     print ("clicks send")
     page.get_by_role("button", name="Enviar Mensaje").click()
