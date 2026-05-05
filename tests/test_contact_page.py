@@ -48,8 +48,8 @@ def test_form_with_required_email_field_left_empty(page: Page):
     print ("cliks send")
     page.get_by_role("button", name="Enviar Mensaje").click()
 
-    print ("users should see the message 'message sent succesufully'")
-    expect(page.get_by_role("heading", name="¡Mensaje enviado con éxito!")).to_be_visible()
+    print ("users should see the message 'email is mandatory'")
+    expect(page.get_by_role("heading", name="¡El email es obligatorio!")).to_be_visible()
     
 
 
