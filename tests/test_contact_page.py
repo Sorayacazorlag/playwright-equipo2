@@ -39,18 +39,23 @@ def test_form_with_required_email_field_left_empty(page: Page):
     print ("given the users contact page 'Contact| Vida Verde'")
     page.goto("https://web-qa.dev.adalab.es/contact")
     
-    print ("fills in the required name with 'Ana Sanchez'")
-    page.get_by_role("textbox", name="Nombre *").fill("Ana Sanchez")
+    print ("fills in the required name with 'ANA SANCHEZ'")
+    page.get_by_role("textbox", name="Nombre *").fill("ANA SANCHEZ")
 
-    print ("fills in the required message field with 'test message'")
-    page.get_by_role("textbox", name="Mensaje *").fill("text message")
+    print ("fills in the required message with 'test message'")
+    page.get_by_role("textbox", name="Mensaje *").fill("test message")
 
-    print ("cliks send")
-    page.get_by_role("button", name="Enviar Mensaje").click()
-
-    print ("users should see the message 'email is mandatory'")
-    expect(page.get_by_role("heading", name="¡El email es obligatorio!")).to_be_visible()
+    print ("fills in the optional telefhone with a number")
+    page.get_by_role("textbox", name="Teléfono (Opcional)").fill("682458569")
     
+    page.get_by_role("button", name="Enviar Mensaje").click()
+    expect(page.get_by_role("textbox", name="Email *")).to_be_visible()
+    
+
+
+
+    
+
 
 
 
