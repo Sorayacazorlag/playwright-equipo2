@@ -12,7 +12,6 @@ def test_complete_and_submit_the_contact_form_with_mandatory_fields(page: Page):
     print("Then debe ver el mensaje 'Mensaje enviado'")
     page.get_by_role("button", name="Enviar Mensaje").click()
 
-    from playwright.sync_api import Page, expect
 
 
 def test_form_with_required_name_field_left_empty(page: Page):
@@ -50,7 +49,6 @@ def test_form_with_required_email_field_left_empty(page: Page):
     page.get_by_role("button", name="Enviar Mensaje").click()
 
     print ("users should see the message 'message sent succesufully'")
-    page.get_by_role("heading", name="¡Mensaje enviado con éxito!").click()
     expect(page.get_by_role("heading", name="¡Mensaje enviado con éxito!")).to_be_visible()
     
 
