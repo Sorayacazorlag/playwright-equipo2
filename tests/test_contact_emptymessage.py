@@ -2,7 +2,7 @@ from playwright.sync_api import Page, expect
 
 def test_submit_form_empty_required_message(page: Page):
     
-    print("Given the user is on the contact page Contáctanos | Vida Verde")
+    print("Given the user is on the contact page: Contáctanos | Vida Verde")
     page.goto("https://web-qa.dev.adalab.es/contact")
     
     print("When they fill in the required name field")
