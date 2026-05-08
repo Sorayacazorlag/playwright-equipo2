@@ -1,6 +1,10 @@
 from playwright.sync_api import Page, expect
+from pages.contact_page import ContactPage 
 
 def test_complete_and_submit_the_contact_form_with_mandatory_fields(page: Page):
+
+    contact_page = ContactPage(page)
+
     print("Given la usuaria abre la página de contacto 'Contáctanos | Vida Verde'")
     page.goto("https://web-qa.dev.adalab.es/contact")
     print("When rellena el nombre")
