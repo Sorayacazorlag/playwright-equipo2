@@ -39,7 +39,6 @@ def test_successful_purchase_with_valid_data(page: Page):
     expect(page).to_have_url("https://web-qa.dev.adalab.es/products")
 
 
-
 def test_unsuccessful_purchase_with_invalid_data(page: Page):
     print("given the users products page 'Products| Vida Verde'")
     page.goto("https://web-qa.dev.adalab.es/products")
@@ -66,9 +65,34 @@ def test_unsuccessful_purchase_with_invalid_data(page: Page):
     page.get_by_role("button", name="Completar Compra").click()
     expect(page.get_by_text("Tarjeta de crédito no válida.")).to_be_visible()
     page.get_by_role("link", name="Volver al Carrito").click()
-    
 
 
+def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
+
+    print("given the users products page 'Products| Vida Verde'")
+    page.goto("https://web-qa.dev.adalab.es/products")
+   
+    print("user name filter by 'maceta'")
+    page.get_by_role("searchbox", name="Nombre").fill("maceta")
+
+    print("click type of 'maceta colgante'")
+    page.get_by_role("heading", name="Maceta Colgante").click()
+
+    print("add to cart 'maceta colgante'")
+    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
+
+    print("checkout purchase")
+    page.get_by_role("link", name="Finalizar Compra").click()
+    expect(page.get_by_text("Maceta Colgante")).to_be_visible()
+
+    print("click on proceed to payment")
+    page.get_by_role("link", name="Proceder al Pago").click()
+    page.get_by_role("textbox", name="Nombre Completo *").fill("maria garcia")
+    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
+    page.get_by_role("textbox", name="Dirección *").fill("calle parmenides, 5 Malaga")
+    page.get_by_role("button", name="Completar Compra").click()
+    expect(page).to_have_url("https://web-qa.dev.adalab.es/checkout")
+ 
 
 
    
