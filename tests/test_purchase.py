@@ -28,7 +28,7 @@ def test_successful_purchase_with_valid_data(page: Page):
     # Verificar página de confirmación
     expect(page.get_by_role("heading", name="¡Compra Realizada con Éxito!")).to_be_visible()
     expect(page.get_by_text("Maceta Colgante")).to_be_visible()
-    expect(page.locator("data.text-gray-900").nth(0)).to_be_visible()  # Total : 14.75
+    expect(page.locator("data.text-gray-900").nth(0)).to_be_visible()  # Product price : 14.75
     expect(page.locator("data.text-gray-900").nth(1)).to_be_visible()  # Subtotal: 14.75
     expect(page.locator("data.text-gray-900").nth(2)).to_be_visible()  # VAT: 3.10
     expect(page.locator("data.text-gray-900").nth(3)).to_be_visible()  # Shipping: 5.00
