@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from pages.purchase_page import PurchasePage
 
 def test_successful_purchase_with_valid_data(page: Page):
     print("given the users products page 'Products| Vida Verde'")
