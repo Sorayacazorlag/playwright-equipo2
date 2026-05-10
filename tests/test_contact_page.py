@@ -59,7 +59,7 @@ def test_form_with_required_email_field_left_empty(page: Page):
     contact_page.fill_contact_message.fill("test message")
 
     print("And they click on submit") 
-    contact_page.press_send_contactclick("enviar mensaje")
+    contact_page.press_send_contact.click("enviar mensaje")
 
     print ("they should see an error message")
     contact_page.verify_message_form("el nombre es obligatorio")
