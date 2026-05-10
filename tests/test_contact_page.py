@@ -53,44 +53,41 @@ def test_form_with_required_email_field_left_empty(page: Page):
     print ("given the users contact page 'Contact| Vida Verde'")
     contact_page.open_contact_page()
     
-    print ("fills in the required name with 'ANA SANCHEZ'")
-    self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+    print ("fills in the required name")
+    contact_page.fill_contact_name.fill("ana sanchez")
 
-    print ("fills in the required message with 'test message'")
-    self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
-
-    print ("fills in the optional telefhone with a number")
-    self.page.get_by_role("textbox", name= "telefono").fill(number)
+    print ("fills in the required message")
+    contact_page.fill_contact_message.fill("test message")
 
     print("And they click on submit") 
-    self.page.get_by_role("button", name="Enviar Mensaje").click()
+    contact_page.press_send_contactclick("enviar mensaje")
 
     print ("they should see an error message")
-    contact_page
+    contact_page.verify_message_form("el nombre es obligatorio")
            
 
     
 
     
 def test_submit_form_empty_required_message(page: Page):
+
+    contact_page = ContactPage(page)
     
     print("Given the user is on the contact page: Contáctanos | Vida Verde")
-    self.page.goto(self.url)
-    
+    contact_page.open_contact_page()
+
     print("When they fill in the required name field")
-    self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+    contact_page.fill_contact_name("ana sanchez")
     
     print("And they fill in the required email field")
-    self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
+    contact_page.fill_contact_email("test@gmail.com")
     
     print("And they click on submit")
-    self.page.get_by_role("button", name="Enviar Mensaje").click()
+    contact_page.press_send_contact("enviar mensaje")
     
     print("Then they should see an error message: El mensaje es obligatorio")
-    expect(self.page.get_by_role("button",text)).to_be_visible()
-
+    contact_page.verify_message_form("el mensaje es obligatorio")
     
-
 
 
 
