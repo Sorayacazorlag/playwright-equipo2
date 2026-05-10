@@ -6,7 +6,7 @@ def test_complete_and_submit_the_contact_form_with_mandatory_fields(page: Page):
     contact_page = ContactPage(page)
 
     print("Given la usuaria abre la página de contacto 'Contáctanos | Vida Verde'")
-    self.page.goto(self.url)
+    contact_page.open_contact_page()
 
     print("When rellena el nombre")
     page.get_by_role("textbox", name="Nombre *").fill("Marta Diaz")
@@ -26,58 +26,68 @@ def test_complete_and_submit_the_contact_form_with_mandatory_fields(page: Page):
 
 
 def test_form_with_required_name_field_left_empty(page: Page):
-    print("Given the users enters contact page 'Contact| Vida Verde'")
-    self.page.goto(self.url)
 
-    print ("fills required email with 'test@gmail.com'")
-    self.page.get_by_role("textbox", name="Email *").fill(email)
+    contact_page = ContactPage(page)
+
+    print("Given the users enters contact page 'Contact| Vida Verde'")
+    contact_page.open_contact_page()
+
+    print ("fills required email")
+    contact_page.fill_contact_email("test@gmail.com")
    
-    print ("fills required message with 'test mesage'")
-    self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
+    print ("fills required message with")
+    contact_page.fill_contact_message("test message")
 
     print ("clicks send")
-    self.page.get_by_role("button", name="Enviar Mensaje").click()
+    contact_page.press_send_contact()
 
     print ("user should see the error message 'name is mandatory'")
-    expect(self.page.get_by_text(text)).to_be_visible()
+    contact_page.verify_message_form("name is mandatory")
 
 
-from playwright.sync_api import Page, expect
 
 def test_form_with_required_email_field_left_empty(page: Page):
 
+    contact_page = ContactPage(page)
+
     print ("given the users contact page 'Contact| Vida Verde'")
-    page.goto("https://web-qa.dev.adalab.es/contact")
+    contact_page.open_contact_page()
     
     print ("fills in the required name with 'ANA SANCHEZ'")
-    page.get_by_role("textbox", name="Nombre *").fill("ANA SANCHEZ")
+    self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
 
     print ("fills in the required message with 'test message'")
-    page.get_by_role("textbox", name="Mensaje *").fill("test message")
+    self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
 
     print ("fills in the optional telefhone with a number")
-    page.get_by_role("textbox", name="Teléfono (Opcional)").fill("682458569")
+    self.page.get_by_role("textbox", name= "telefono").fill(number)
+
+    print("And they click on submit") 
+    self.page.get_by_role("button", name="Enviar Mensaje").click()
+
+    print ("they should see an error message")
+    contact_page
+           
+
     
-    page.get_by_role("button", name="Enviar Mensaje").click()
-    expect(page.get_by_role("textbox", name="Email *")).to_be_visible()
+
     
 def test_submit_form_empty_required_message(page: Page):
     
     print("Given the user is on the contact page: Contáctanos | Vida Verde")
-    page.goto("https://web-qa.dev.adalab.es/contact")
+    self.page.goto(self.url)
     
     print("When they fill in the required name field")
-    page.get_by_role("textbox", name="Nombre *").fill("Marta Díaz")
+    self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
     
     print("And they fill in the required email field")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
+    self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
     
     print("And they click on submit")
-    page.get_by_role("button", name="Enviar Mensaje").click()
+    self.page.get_by_role("button", name="Enviar Mensaje").click()
     
     print("Then they should see an error message: El mensaje es obligatorio")
-    expect(page.get_by_text("El mensaje es obligatorio")).to_be_visible()
-
+    expect(self.page.get_by_role("button",text)).to_be_visible()
 
     
 
