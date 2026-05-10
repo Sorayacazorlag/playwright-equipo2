@@ -45,7 +45,6 @@ def test_form_with_required_name_field_left_empty(page: Page):
     contact_page.verify_message_form("name is mandatory")
 
 
-
 def test_form_with_required_email_field_left_empty(page: Page):
 
     contact_page = ContactPage(page)
@@ -65,8 +64,6 @@ def test_form_with_required_email_field_left_empty(page: Page):
     print ("they should see an error message")
     contact_page.verify_message_form("el nombre es obligatorio")
            
-
-    
 
     
 def test_submit_form_empty_required_message(page: Page):
