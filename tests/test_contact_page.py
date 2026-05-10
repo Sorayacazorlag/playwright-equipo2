@@ -16,7 +16,7 @@ def test_complete_and_submit_the_contact_form_with_mandatory_fields(page: Page):
     print("And pulsa el boton enviar")
     page.get_by_role("button", name="Enviar Mensaje").click()
     print("Then debe ver un mensaje de exito")
-    expect(page.get_by_text("heading", name="¡Mensaje enviado con éxito!")).to_be_visible(  )
+    expect(page.get_by_text("heading", name="¡Mensaje enviado con éxito!")).to_be_visible()
     
 
 
