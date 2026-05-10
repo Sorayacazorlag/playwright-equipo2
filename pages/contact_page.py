@@ -8,9 +8,7 @@ class ContactPage:
         self.url = "https://web-qa.dev.adalab.es/contact"
         self.title = "Contáctanos"
 
-    contact_page = ContactPage(page)
-
-
+    
 
     def open_contact_page(self):
         self.page.goto(self.url)
@@ -40,7 +38,6 @@ class ContactPage:
 def test_form_with_required_email_field_left_empty(page: Page):
 
     
-
     def open_contact_page(self):
         self.page.goto(self.url)
 
@@ -50,9 +47,6 @@ def test_form_with_required_email_field_left_empty(page: Page):
     def fill_contact_message(self, mensaje):    
         self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
 
-    def fill_contact_number(self, number):
-        print ("fills in the optional telefhone with a number")
-        self.page.get_by_role("textbox", name= "telefono").fill(number)
 
     def press_send_contact(self):
         self.page.get_by_role("button", name="Enviar Mensaje").click()
