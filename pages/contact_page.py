@@ -1,11 +1,16 @@
-from playwright.sync_api import Page, expect
+from playwright.async_api import Page, expect
+
 
 class ContactPage:
 
     def __init__(self, page: Page):
         self.page = page
         self.url = "https://web-qa.dev.adalab.es/contact"
-        self. title = "Contáctanos"
+        self.title = "Contáctanos"
+
+    contact_page = ContactPage(page)
+
+
 
     def open_contact_page(self):
         self.page.goto(self.url)
@@ -30,3 +35,50 @@ class ContactPage:
 
     def verify_contact_url(self):
         expect(self.page).to_have_url(self.url)
+
+
+def test_form_with_required_email_field_left_empty(page: Page):
+
+    
+
+    def open_contact_page(self):
+        self.page.goto(self.url)
+
+    def fill_contact_name(self, name):
+        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+
+    def fill_contact_message(self, mensaje):    
+        self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
+
+    def fill_contact_number(self, number):
+        print ("fills in the optional telefhone with a number")
+        self.page.get_by_role("textbox", name= "telefono").fill(number)
+
+    def press_send_contact(self):
+        self.page.get_by_role("button", name="Enviar Mensaje").click()
+
+    def verify_message_form(self,text):
+        expect(self.page.get_by_role ("heading", name=text)).to_be_visible
+
+
+def test_submit_form_empty_required_message(page: Page):
+
+    def open_contact_page(self):
+        self.page.goto(self.url)
+
+    def fill_contact_name(self, name):
+        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+    
+    def fill_contact_email(self, email):
+        self.page.get_by_role("textbox", name="Email *").fill(email) 
+
+    def press_send_contact(self):
+        self.page.get_by_role("button", name="Enviar Mensaje").click()
+
+    def see_message_form(self,text):
+        expect(self.page.get_by_role("button",text)).to_be_visible()
+
+
+
+
+    
