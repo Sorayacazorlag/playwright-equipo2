@@ -13,8 +13,11 @@ def test_complete_and_submit_the_contact_form_with_mandatory_fields(page: Page):
     page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
     print("And rellena el mensaje")
     page.get_by_role("textbox", name="Mensaje *").fill("test mensaje")
-    print("Then debe ver el mensaje 'Mensaje enviado'")
+    print("And pulsa el boton enviar")
     page.get_by_role("button", name="Enviar Mensaje").click()
+    print("Then debe ver un mensaje de exito")
+    expect(page.get_by_text("heading", name="¡Mensaje enviado con éxito!")).to_be_visible(  )
+    
 
 
 def test_form_with_required_name_field_left_empty(page: Page):
