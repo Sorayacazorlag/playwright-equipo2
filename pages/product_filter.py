@@ -24,25 +24,11 @@ class ProductFilterPage:
 
     def expect_results_visible(self):
         expect(self.page.get_by_role("region", name="Catálogo de productos").get_by_role("list")).to_be_visible()
-        
 
-
-
-
-    def filter_by_valid_name_price_and_category_values(self):
-        self.page.goto("https://web-qa.dev.adalab.es/products")
-        self.page.get_by_role("searchbox", name="Nombre").fill("regadera")
-        self.page.get_by_label("CategoríaTodas las categorí").select_option("Herramientas")
-        self.page.get_by_role("spinbutton", name="Precio mínimo").fill("20")
-        self.page.get_by_role("spinbutton", name="Precio máximo").fill("25")
-        expect(self.page.get_by_role("region", name="Catálogo de productos").get_by_role("list")).to_be_visible()
-
-
-    def filter_by_a_value_with_no_results(self):
-        self.page.goto("https://web-qa.dev.adalab.es/products")
-        self.page.get_by_role("searchbox", name="Nombre").fill("manzana")
+    def expect_no_results_message(self):    
         expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()    
-def Filter_by_a_value_with_no_results(self):
-    self.page.goto("https://web-qa.dev.adalab.es/products")
-    self.page.get_by_role("searchbox", name="Nombre").fill("manzana")
-    expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()
+
+
+
+
+
