@@ -24,12 +24,13 @@ def test_successful_purchase_with_valid_data(page: Page):
     purchase_page.checkout_purchase.click("maceta colgante")
 
     print("click on proceed to payment")
-    page.get_by_role("link", name="Proceder al Pago").click()
-    page.get_by_role("textbox", name="Nombre Completo *").fill("maria garcia")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
-    page.get_by_role("textbox", name="Dirección *").fill("calle parmenides, 5 Malaga")
-    page.get_by_role("textbox", name="Número de Tarjeta de Crédito *").fill("4242 4242 4242 4242")
-    page.get_by_role("button", name="Completar Compra").click()
+    purchase_page.press_send_payment.click("proceder al pago")
+    purchase_page.fill_complete_name.fill("maria garcia")
+    purchase_page.fill_email.fill("test@gmail.com")
+    purchase_page.fill_adress("calle parmenides,5 Malaga")
+    purchase_page.fill_credit_card("4242 4242 4242 4242")
+    purchase_page.press_place_older.click("completar compra")    
+    
 
     # Verificar página de confirmación
     expect(page.get_by_role("heading", name="¡Compra Realizada con Éxito!")).to_be_visible()

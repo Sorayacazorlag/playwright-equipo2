@@ -27,3 +27,23 @@ class PurchasePage:
 
     def checkout_purchase(self,name):
         expect(self.page.get_by_text(name)).to_be_visible()
+
+    def press_send_payment (self,text)
+        self.page.get_by_role("link", name=text).click()
+
+    def fill_complete_name (self,name)
+        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+
+    def fill_email(self,email)
+        self.page.get_by_role("textbox", name="Email *").fill(email)
+
+    def fill_adress(self,adress)
+        self.page.get_by_role("textbox", name="direccion").fill(adress)
+
+    def fill_credit_card(self, credit_card)
+        self.page.get_by_role("textbox", name= "tarjeta credito").fill(credit_card)
+
+    def press_place_older(self,text)
+        self.page.get_by_role("button", name="Completar Compra").click(text)
+
+       
