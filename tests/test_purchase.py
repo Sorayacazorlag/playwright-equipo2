@@ -85,8 +85,7 @@ def test_unsuccessful_purchase_with_invalid_data(page: Page):
 
    
 
-
-def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
+def pytest(page: Page):
     
     from pages.purchase_page import PurchasePage        
 
