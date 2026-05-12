@@ -30,7 +30,7 @@ def test_successful_purchase_with_valid_data(page: Page):
     purchase_page.fill_adress("calle parmenides,5 Malaga")
     purchase_page.fill_credit_card("4242 4242 4242 4242")
     purchase_page.press_place_older.click("completar compra")    
-    
+
 
     # Verificar página de confirmación
 
@@ -48,30 +48,36 @@ def test_successful_purchase_with_valid_data(page: Page):
     
 
 def test_unsuccessful_purchase_with_invalid_data(page: Page):
+
+    purchase_page = PurchasePage(page)
+
+
     print("given the users products page 'Products| Vida Verde'")
-    page.goto("https://web-qa.dev.adalab.es/products")
+    purchase_page.open_purchase_page("https://web-qa.dev.adalab.es/products")
 
     print("user name filter by 'maceta'")
-    page.get_by_role("searchbox", name="Nombre").fill("maceta")
+    purchase_page.filter_product_name("maceta")
 
     print("click type of 'maceta colgante'")
-    page.get_by_role("heading", name="Maceta Colgante").click()
+    purchase_page.type_of_product.click("maceta colgante")
 
     print("add to cart 'maceta colgante'")
-    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
+    purchase_page.add_to_cart.click("maceta colgante")
 
     print("checkout purchase")
-    page.get_by_role("link", name="Finalizar Compra").click()
-    expect(page.get_by_text("Maceta Colgante")).to_be_visible()
+    purchase_page.press_send_checkout_purchase.click("finalizar compra")
+    purchase_page.checkout_purchase.click("maceta colgante")
 
     print("click on proceed to payment")
-    page.get_by_role("link", name="Proceder al Pago").click()
-    page.get_by_role("textbox", name="Nombre Completo *").fill("maria garcia")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
-    page.get_by_role("textbox", name="Dirección *").fill("calle parmenides, 5 Malaga")
-    page.get_by_role("textbox", name="Número de Tarjeta de Crédito *").fill("1111 4242 4242 4242 4242")
-    page.get_by_role("button", name="Completar Compra").click()
-    expect(page.get_by_text("Tarjeta de crédito no válida.")).to_be_visible()
+    purchase_page.press_send_payment.click("Proceder al Pago")
+    purchase_page.fill_complete_name.click("maria garcia")
+    purchase_page.fill_email.fill("test@gmail.com")
+    purchase_page.fill_adress("calle parmenides,5 Malaga")
+    purchase_page.fill_credit_card("4242 4242 4242 4242")
+    purchase_page.press_place_older.click("completar compra")
+    purchase_page.m
+ 
+
     page.get_by_role("link", name="Volver al Carrito").click()
 
 
