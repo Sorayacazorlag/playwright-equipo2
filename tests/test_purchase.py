@@ -43,9 +43,9 @@ def test_successful_purchase_with_valid_data(page: Page):
     purchase_page.verify_total("22.85")         # Total: 22.85
 
     
-    page.get_by_role("link", name="Volver a la Tienda").click()
-    expect(page).to_have_url("https://web-qa.dev.adalab.es/products")
-
+    purchase_page.click("volver a la tienda")
+    purchase_page.verify_open_website("https://web-qa.dev.adalab.es/products")
+    
 
 def test_unsuccessful_purchase_with_invalid_data(page: Page):
     print("given the users products page 'Products| Vida Verde'")
