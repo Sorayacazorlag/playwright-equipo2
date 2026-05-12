@@ -11,6 +11,7 @@ class ProductFilterPage:
         self.page.goto(self.url)
 
     def filter_by_name(self, name):
+        self.page.get_by_role("searchbox", name="Nombre").click()
         self.page.get_by_role("searchbox", name="Nombre").fill(name)
    
     def filter_by_category(self, category):   
@@ -27,6 +28,14 @@ class ProductFilterPage:
 
     def expect_no_results_message(self):    
         expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()    
+
+    def add_product(self, name):
+        self.page.get_by_role("button", name=f"Añadir {name} al carrito").click()
+
+    def clear_filter(self):
+        self.page.get_by_role("button", name="Quitar filtros y ver todos").click()
+
+   
 
 
 
