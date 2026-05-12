@@ -33,15 +33,16 @@ def test_successful_purchase_with_valid_data(page: Page):
     
 
     # Verificar página de confirmación
-    expect(page.get_by_role("heading", name="¡Compra Realizada con Éxito!")).to_be_visible()
-    expect(page.get_by_text("Maceta Colgante")).to_be_visible()
-    expect(page.locator("data.text-gray-900").nth(0)).to_be_visible()  # Product price : 14.75
-    expect(page.locator("data.text-gray-900").nth(1)).to_be_visible()  # Subtotal: 14.75
-    expect(page.locator("data.text-gray-900").nth(2)).to_be_visible()  # VAT: 3.10
-    expect(page.locator("data.text-gray-900").nth(3)).to_be_visible()  # Shipping: 5.00
-    expect(page.locator("data.text-green-600")).to_be_visible()        # Total: 22.85
 
+    purchase_page.verify_message_form("¡Compra realizada con éxito!")
+    purchase_page.verify_see_message("maceta colgante")
+    purchase_page.verify_product_price("14.75") # Product price : 14.75
+    purchase_page.verify_subtotal("14.75")      # Subtotal: 14.75
+    purchase_page.verify_vat("3.10")            # VAT: 3.10
+    purchase_page.verify_shipping("5.00")       # Shipping: 5.00
+    purchase_page.verify_total("22.85")         # Total: 22.85
 
+    
     page.get_by_role("link", name="Volver a la Tienda").click()
     expect(page).to_have_url("https://web-qa.dev.adalab.es/products")
 
