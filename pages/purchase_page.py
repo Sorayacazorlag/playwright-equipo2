@@ -114,9 +114,8 @@ def test_unsuccessful_purchase_with_empty_credit_card_field (page: Page):
     def fill_credit_card(self, credit_card):
         self.page.get_by_role("textbox", name= "tarjeta credito").fill(credit_card)
 
-    def message_credit_card_invalid(self,text):
-        expect(self.page.get_by_text(text)).to_be_visible()
-
+    def verify_see_message(self,name):
+        expect(self.page.get_by_text(name)).to_be_visible()
 
 
 

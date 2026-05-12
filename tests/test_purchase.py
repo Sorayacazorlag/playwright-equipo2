@@ -75,7 +75,7 @@ def test_unsuccessful_purchase_with_invalid_data(page: Page):
     purchase_page.fill_adress("calle parmenides,5 Malaga")
     purchase_page.fill_credit_card("4242 4242 4242 4242")
     purchase_page.press_place_older.click("completar compra")
-    purchase_page.m
+    
  
 
     page.get_by_role("link", name="Volver al Carrito").click()
