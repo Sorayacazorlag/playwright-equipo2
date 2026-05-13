@@ -30,7 +30,7 @@ class PurchasePage:
         self.page.get_by_role("link", name=text).click()
 
     def fill_complete_name (self,name):
-        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+        self.page.get_by_role("textbox", name="Nombre *").fill(name)
 
     def fill_email(self,email):
         self.page.get_by_role("textbox", name="Email *").fill(email)
