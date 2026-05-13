@@ -7,16 +7,14 @@ def test_successful_purchase_with_valid_data(page: Page):
 
     purchase_page = PurchasePage(page)
 
-
     print("given the users products page 'Products| Vida Verde'")
     purchase_page.open_purchase_page()
 
     print("user name filter by 'maceta'")
-    purchase_page.filter_product_name("maceta")
-    purchase_page.filter_product_name("maceta") #sin .fill
+    purchase_page.filter_product_name("maceta")    
 
     print("click type of 'maceta colgante'")
-    purchase_page.type_of_product()
+    purchase_page.type_of_product("maceta colgante")
 
     print("add to cart 'maceta colgante'")
     purchase_page.add_to_cart("añadir maceta colgante al carrito")
@@ -62,7 +60,7 @@ def test_unsuccessful_purchase_with_invalid_data(page: Page):
     purchase_page.filter_product_name("maceta")
 
     print("click type of 'maceta colgante'")
-    purchase_page.type_of_product()
+    purchase_page.type_of_product("maceta colgante")
 
     print("add to cart 'maceta colgante'")
     purchase_page.add_to_cart("maceta colgante")
@@ -88,7 +86,6 @@ def test_unsuccessful_purchase_with_field_data(page: Page):
  
     print("given the users products page 'Products| Vida Verde'")
     purchase_page.open_purchase_page()
-    purchase_page.open_purchase_page() #Sin argumento "https://web-qa.dev.adalab.es/products"
     
     print("user name filter by 'maceta'")
     purchase_page.filter_product_name("maceta")
