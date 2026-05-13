@@ -5,7 +5,7 @@ from pages.products_page import ProductsPage
 def test_products_page(page: Page):
     products_page = ProductsPage(page);
 
-    print("When the user enters to the products page")
+    print("When the user visits to the products page")
     products_page.open_products_page()
 
     

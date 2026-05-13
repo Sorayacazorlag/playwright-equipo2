@@ -11,9 +11,8 @@ class ProductFilterPage:
         self.page.goto(self.url)
 
     def filter_by_name(self, name):
-        self.page.get_by_role("searchbox", name="Nombre").click()
         self.page.get_by_role("searchbox", name="Nombre").fill(name)
-   
+        
     def filter_by_category(self, category):   
         self.page.get_by_label("CategoríaTodas las categorí").select_option(category)   
 
