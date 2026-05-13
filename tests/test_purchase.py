@@ -2,10 +2,7 @@ from playwright.sync_api import Page, expect
 from pages.purchase_page import PurchasePage
 
 
-
 def test_successful_purchase_with_valid_data(page: Page):
-
-    from pages.purchase_page import PurchasePage
 
 
     purchase_page = PurchasePage(page)
@@ -53,7 +50,7 @@ def test_successful_purchase_with_valid_data(page: Page):
 
 def test_unsuccessful_purchase_with_invalid_data(page: Page):
 
-    from pages.purchase_page import PurchasePage 
+     
 
     purchase_page = PurchasePage(page)
 
@@ -87,7 +84,7 @@ def test_unsuccessful_purchase_with_invalid_data(page: Page):
 
 def pytest(page: Page):
     
-    from pages.purchase_page import PurchasePage        
+          
 
     purchase_page = PurchasePage(page)
  
