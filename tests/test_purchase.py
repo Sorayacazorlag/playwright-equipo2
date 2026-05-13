@@ -12,11 +12,8 @@ def test_successful_purchase_with_valid_data(page: Page):
     purchase_page.open_purchase_page()
 
     print("user name filter by 'maceta'")
-<<<<<<< HEAD
     purchase_page.filter_product_name("maceta")
-=======
     purchase_page.filter_product_name("maceta") #sin .fill
->>>>>>> f9add9179c69ee14899afaf6cf9c02dfdcca933c
 
     print("click type of 'maceta colgante'")
     purchase_page.type_of_product()
@@ -90,11 +87,8 @@ def test_unsuccessful_purchase_with_field_data(page: Page):
     purchase_page = PurchasePage(page)
  
     print("given the users products page 'Products| Vida Verde'")
-<<<<<<< HEAD
     purchase_page.open_purchase_page()
-=======
     purchase_page.open_purchase_page() #Sin argumento "https://web-qa.dev.adalab.es/products"
->>>>>>> f9add9179c69ee14899afaf6cf9c02dfdcca933c
     
     print("user name filter by 'maceta'")
     purchase_page.filter_product_name("maceta")
