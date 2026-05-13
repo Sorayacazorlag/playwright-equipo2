@@ -1,8 +1,6 @@
 
 from playwright.sync_api import Page, expect
 
-from pages.purchase_page import PurchasePage
-
 class PurchasePage:
 
     def __init__(self, page: Page):
@@ -73,12 +71,11 @@ class PurchasePage:
     def verify_open_website(self,url):
         expect(self.page).to_have_url(url)
 
-def test_unsuccessful_purchase_with_empty_credit_card_field (page: Page):
+def test_unsuccessful_purchase_with_invalid_credit_card(page: Page):
    
    from playwright.sync_api import Page, expect
 
    class PurchasePage:
-
 
     def __init__(self, page: Page):
         self.page = page
@@ -120,7 +117,6 @@ def test_unsuccessful_purchase_with_empty_credit_card_field (page: Page):
 
 
 def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
-
      
    from playwright.sync_api import Page, expect
 
@@ -135,7 +131,6 @@ def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
     def open_purchase_page(self):
         self.page.goto(self.url)
 
-        
     def filter_product_name(self,name):
         self.page.get_by_role("searchbox", name="Nombre").fill(name) 
 
@@ -159,3 +154,10 @@ def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
 
     def fill_adress(self,adress):
         self.page.get_by_role("textbox", name="direccion").fill(adress)
+
+    def verify_see_message(self,name):
+        expect(self.page.get_by_text(name)).to_be_visible()
+   
+    def back_shopping(self):
+        self.page.get_by_role("link", name=self.title).click()
+   
