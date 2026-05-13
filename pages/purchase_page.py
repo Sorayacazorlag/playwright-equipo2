@@ -15,7 +15,7 @@ class PurchasePage:
         self.page.get_by_role("searchbox", name="Nombre").fill(name)
 
     def type_of_product(self,name):
-         self.page.get_by_role("heading", name=name).click()
+        self.page.get_by_role("heading", name=name).click()
 
     def add_to_cart(self,button_name):
         self.page.get_by_role("button", name= button_name).click()
@@ -117,7 +117,6 @@ def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
 
     from playwright.sync_api import Page, expect
 
-   class PurchasePage:
 
     def __init__(self, page: Page):
         self.page = page
