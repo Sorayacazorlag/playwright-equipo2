@@ -14,11 +14,12 @@ class PurchasePage:
     def filter_product_name(self, name):
         self.page.get_by_role("searchbox", name="Nombre").fill(name)
 
-    def type_of_product(self,product_name):
-         self.page.get_by_role("heading", name=product_name).click()
+    def type_of_product(self,name):
+         self.page.get_by_role("heading", name=name).click()
 
-    def add_to_cart(self,text):
-        self.page.get_by_role("button", name=text).click()
+    def add_to_cart(self,button_name):
+        self.page.get_by_role("button", name=re.compile( button_name, re.I)).click()
+
 
     def press_send_checkout_purchase(self,text):
         self.page.get_by_role("link", name=text).click()
@@ -91,8 +92,11 @@ def test_unsuccessful_purchase_with_invalid_credit_card(page: Page):
     def type_of_product(self,product_name):
         self.page.get_by_role("heading", name=product_name).click()
 
-    def add_to_cart(self,text):
-        self.page.get_by_role("button", name=text).click()
+    import re
+
+    def add_to_cart(self,button_name):
+        self.page.get_by_role("button", name=re.compile( button_name, re.I)).click()
+
 
     def checkout_purchase(self,name):
         expect(self.page.get_by_text(name)).to_be_visible()
