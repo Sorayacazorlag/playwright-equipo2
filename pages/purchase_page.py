@@ -14,11 +14,11 @@ class PurchasePage:
     def filter_product_name(self, name):
         self.page.get_by_role("searchbox", name="Nombre").fill(name)
 
-    def type_of_product(self,name):
-        self.page.get_by_role("heading", name=name).click()
+    def type_of_product(self,product_name):
+        self.page.get_by_role("heading",name= product_name).click()
 
     def add_to_cart(self,button_name):
-        self.page.get_by_role("button", name= button_name).click()
+        self.page.get_by_role("button",name= button_name).click()
 
     def press_send_checkout_purchase(self,text):
         self.page.get_by_role("link", name=text).click()
