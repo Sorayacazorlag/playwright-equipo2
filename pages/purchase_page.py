@@ -98,7 +98,7 @@ def test_unsuccessful_purchase_with_invalid_credit_card(page: Page):
         self.page.get_by_role("link", name=text).click()
 
     def fill_complete_name (self,name):
-        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+        self.page.get_by_role("textbox", name="Nombre *").fill(name)
 
     def fill_email(self,email):
         self.page.get_by_role("textbox", name="Email *").fill(email)
@@ -142,7 +142,7 @@ def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
         self.page.get_by_role("link", name=text).click()
 
     def fill_complete_name (self,name):
-        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+        self.page.get_by_role("textbox", name="Nombre *").fill(name)
 
     def fill_email(self,email):
         self.page.get_by_role("textbox", name="Email *").fill(email)
