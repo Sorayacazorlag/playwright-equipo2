@@ -80,11 +80,7 @@ def test_unsuccessful_purchase_with_invalid_data(page: Page):
     purchase_page.verify_see_message("tarjeta de credito invalida")
     purchase_page.back_shopping.click("volver al carrito")
 
-   
 
-def pytest(page: Page):
-    
-          
 
     purchase_page = PurchasePage(page)
  
