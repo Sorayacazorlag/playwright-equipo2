@@ -24,6 +24,15 @@ class ProductsPage:
 
     def verify_products_url(self):
         expect(self.page).to_have_url(self.url)
+    
+    def filter_by_name(self, name):
+        self.page.get_by_role("searchbox", name="Nombre").fill(name)
+        
+    def add_product(self, product):
+        self.page.get_by_role("button", name=product).click()
+
+    def clear_filter(self):
+        self.page.get_by_role("button", name="Quitar filtros y ver todos").click()
 
     
 
