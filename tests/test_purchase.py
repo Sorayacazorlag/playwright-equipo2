@@ -81,6 +81,7 @@ def test_unsuccessful_purchase_with_invalid_data(page: Page):
     purchase_page.back_shopping.click("volver al carrito")
 
 
+def test_unsuccessful_purchase_with_field_data(page: Page):
 
     purchase_page = PurchasePage(page)
  
