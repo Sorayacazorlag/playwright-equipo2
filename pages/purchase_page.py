@@ -18,8 +18,7 @@ class PurchasePage:
          self.page.get_by_role("heading", name=name).click()
 
     def add_to_cart(self,button_name):
-        self.page.get_by_role("button", name=re.compile( button_name, re.I)).click()
-
+        self.page.get_by_role("button", name= button_name).click()
 
     def press_send_checkout_purchase(self,text):
         self.page.get_by_role("link", name=text).click()
@@ -73,7 +72,7 @@ class PurchasePage:
         expect(self.page).to_have_url(url)
 
 def test_unsuccessful_purchase_with_invalid_credit_card(page: Page):
-   
+
    from playwright.sync_api import Page, expect
 
    class PurchasePage:
@@ -91,12 +90,6 @@ def test_unsuccessful_purchase_with_invalid_credit_card(page: Page):
 
     def type_of_product(self,product_name):
         self.page.get_by_role("heading", name=product_name).click()
-
-    import re
-
-    def add_to_cart(self,button_name):
-        self.page.get_by_role("button", name=re.compile( button_name, re.I)).click()
-
 
     def checkout_purchase(self,name):
         expect(self.page.get_by_text(name)).to_be_visible()
@@ -121,8 +114,8 @@ def test_unsuccessful_purchase_with_invalid_credit_card(page: Page):
 
 
 def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
-     
-   from playwright.sync_api import Page, expect
+
+    from playwright.sync_api import Page, expect
 
    class PurchasePage:
 
@@ -130,7 +123,6 @@ def test_unsuccessful_purchase_with_empty_credit_card_field(page: Page):
         self.page = page
         self.url = "https://web-qa.dev.adalab.es/products"
         self.title = "Catálogo de productos"
-
 
     def open_purchase_page(self):
         self.page.goto(self.url)

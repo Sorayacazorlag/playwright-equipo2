@@ -14,7 +14,7 @@ def test_add_products_cart_view_summary_empty_cart(page: Page):
     products_page.filter_by_name("Sansevieria") 
     
     print("And adds the product to the cart")
-    products_page.add_product()
+    products_page.add_product("Sansevieria") #faltaba el argumento
     
     print("And clears the filter")
     products_page.clear_filter()
@@ -23,7 +23,7 @@ def test_add_products_cart_view_summary_empty_cart(page: Page):
     products_page.filter_by_name("Maceta de barro")
 
     print("And adds the product to the cart")
-    products_page.add_product()
+    products_page.add_product("Maceta de barro") #faltaba el argumento
 
     print("And visits the shopping cart")
     cart_page.open_cart_page()
@@ -35,7 +35,7 @@ def test_add_products_cart_view_summary_empty_cart(page: Page):
     cart_page.verify_product_category("Plantas")
 
     print('And its price "22.00€"')
-    cart_page.verify_products_price("22.00 €")
+    cart_page.verify_products_price("22.00 €") # No pueden ser 22 los dos productos
 
     print('And they should see the product "Maceta de Barro Grande"')
     cart_page.verify_product_name("Maceta de Barro Grande")
