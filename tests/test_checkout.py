@@ -1,5 +1,6 @@
 
-from playwright.sync_api import Playwright, sync_playwright, expect
+from playwright.sync_api import Page,expect
+
 
 def test_successful_purchase_with_valid_data(page: Page):
     print("Given user visit homepage")
@@ -12,7 +13,7 @@ def test_successful_purchase_with_valid_data(page: Page):
     print ("and visits the cart page")
     page.get_by_role("button", name="Añadir Maceta Colgante al").click()
     
-    print "(and click payment)"
+    print ("send click to checkout")
     page.get_by_role("link", name="Proceder al Pago").click()
 
     print ("fills the valid field with  maria garcia")
@@ -28,13 +29,17 @@ def test_successful_purchase_with_valid_data(page: Page):
     page.get_by_role("textbox", name="Número de Tarjeta de Crédito *").fill("4242 4242 4242 4242")
 
     print ("clicks on complete purchase")
+
+    # Espera a que el botón esté visible antes de hacer clic
+    page.get_by_role("button", name="Completar Compra").wait_for(state="visible")
+
+    # Ahora sí, clic seguro sin timeout
     page.get_by_role("button", name="Completar Compra").click()
 
     print ("see the message compra realizada con exito")
-    page.get_by_role("heading", name="¡Compra Realizada con Éxito!").click()
     expect(page.get_by_role("heading", name="¡Compra Realizada con Éxito!")).to_be_visible()
 
-    print ("back to catalog de productos")
-    page.get_by_role("heading", name="Catálogo de Productos").click()
-    expect(page.get_by_role("heading", name="Catálogo de Productos")).to_be_visible()
+    print ("back to catalogo de productos")
+    page.get_by_role("heading", name="Catalogo de productos").click()
+    expect(page.get_by_role("heading", name="Catalogo de Productos")).to_be_visible()
 
