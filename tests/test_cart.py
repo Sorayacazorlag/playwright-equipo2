@@ -35,7 +35,7 @@ def test_add_products_cart_view_summary_empty_cart(page: Page):
     cart_page.verify_product_category("Plantas")
 
     print('And its price "22.00€"')
-    cart_page.verify_products_price("22.00 €") # No pueden ser 22 los dos productos
+    cart_page.verify_one_product_price("22.00 €") # No pueden ser 22 los dos productos
 
     print('And they should see the product "Maceta de Barro Grande"')
     cart_page.verify_product_name("Maceta de Barro Grande")
@@ -44,14 +44,16 @@ def test_add_products_cart_view_summary_empty_cart(page: Page):
     cart_page.verify_product_category("Macetas")
 
     print('And its price "10.50€"')
-    cart_page.verify_products_price("10.50 €")
+    cart_page.verify_one_product_price("10.50 €")
+    
 
     print("And they should see the order summary with the following details:")
     cart_page.verify_order_summary("Resumen del Pedido")
-   
+    
+
     print('Subtotal, the sum of both products "32.50€"')
     cart_page.verify_products_price("Productos (2)32.50 €")
-    
+
     print('Including 21% VAT "6.83€"')
     cart_page.verify_vat("IVA (21%)6.83 €")
     
@@ -65,6 +67,6 @@ def test_add_products_cart_view_summary_empty_cart(page: Page):
     cart_page.empty_cart()
     
     print('Then they should see the message "Tu carrito está vacío"')
-    cart_page.empty_cart_message("Tu carrito está vacío")
+    cart_page.verify_product_name("Tu carrito está vacío")
 
     
