@@ -40,7 +40,6 @@ class ProductsPage:
     def expect_no_results_message(self):    
         expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()
 
-       
     def add_product(self, product):
         self.page.get_by_role("button", name=product).click()
 
