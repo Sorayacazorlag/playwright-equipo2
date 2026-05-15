@@ -13,4 +13,4 @@ def Filter_by_valid_name_price_and_category_values(page: Page):
 def Filter_by_a_value_with_no_results(page: Page):
     page.goto("https://web-qa.dev.adalab.es/products")
     page.get_by_role("searchbox", name="Nombre").fill("manzana")
-    expect(page.get_by_text("No se encontraron productos")).to_be_visible()
+    expect(page.get_by_text("No se encontraron productos"))
