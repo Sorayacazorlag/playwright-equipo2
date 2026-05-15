@@ -24,7 +24,7 @@ def test_complete_and_submit_the_contact_form_with_mandatory_fields(page: Page):
     contact_page.verify_message_form("¡Mensaje enviado con éxito!")
 
 
-def test_form_with_required_name_field_left_empty(page: Page):
+def test_form_with_required_name_field_left_empty(page: Page): #Teresa
     contact_page = ContactPage(page)
     print("Given the users enters contact page 'Contact| Vida Verde'")
     contact_page.open_contact_page()
@@ -42,7 +42,7 @@ def test_form_with_required_name_field_left_empty(page: Page):
     contact_page.verify_message_form("El nombre es obligatorio")
   
 
-def test_form_with_required_email_field_left_empty(page: Page):
+def test_form_with_required_email_field_left_empty(page: Page):   #Teresa
 
     print ("given the users contact page 'Contact| Vida Verde'")
     page.goto("https://web-qa.dev.adalab.es/contact")
@@ -64,7 +64,7 @@ def test_form_with_required_email_field_left_empty(page: Page):
     expect(page.get_by_text("El email es obligatorio")).to_be_visible()
     
    
-def test_submit_form_empty_required_message(page: Page):
+def test_submit_form_empty_required_message(page: Page):    
     
     print("Given the user is on the contact page: Contáctanos | Vida Verde")
     page.goto("https://web-qa.dev.adalab.es/contact")
@@ -82,7 +82,7 @@ def test_submit_form_empty_required_message(page: Page):
     expect(page.get_by_text("El mensaje es obligatorio")).to_be_visible()
     
 
-def test_form_invalid_required_email(page: Page):
+def test_form_invalid_required_email(page: Page): #Teresa
     
     print("Given the user is on the page: Contáctenos | Vida Verde")
     page.goto("https://web-qa.dev.adalab.es/contact")
