@@ -1,37 +1,37 @@
 from playwright.sync_api import Page
 from pages.products_page import ProductsPage
 
-def Filter_by_valid_name_price_and_category_values(page: Page):
-     productos_page= ProductsPage(page)
+def test_filter_by_valid_name_price_and_category_values(page: Page):
+    products_page = ProductsPage(page)
 
     print("Given: La usuaria abre la página de productos | Vida Verde")
-    productos_page.open_products_page()
+    products_page.open_products_page()
 
     print("When: La usuaria filtra por nombre 'Regadera'")
-    productos_page.filtrar_por_nombre("Regadera") 
+    products_page.filter_by_name("Regadera") 
 
     print("And filtra por categoría 'Herramientas'")  
-    productos_page.filtrar_por_categoria("Herramientas")
+    products_page.filter_by_category("Herramientas")
 
     print("And filtra por precio mínimo '20'")
-    productos_page.filtrar_por_precio_minimo("20")
+    products_page.filter_by_min_price("20")
 
     print("And filtrar por precio máximo '25'")
-    productos_page.filtrar_por_precio_maximo("25")
+    products_page.filter_by_max_price("25")
   
     print("Then debe ver el producto 'Regadera Metálica'")
-    productos_page.verify_products_name("Regadera Metálica")
+    products_page.verify_products_name("Regadera Metálica")
 
 
 
-def Filter_by_a_value_with_no_results(page: Page):
-    productos_page = ProductsPage(page)
+def test_filter_by_a_value_with_no_results(page: Page):
+    products_page = ProductsPage(page)
 
     print("Given la usuaria entra en la página de productos")
-    productos_page.open_products_page()
+    products_page.open_products_page()
 
     print("When filtra por el nombre 'manzana'")
-    productos_page.filtrar_por_nombre("manzana")
+    products_page.filter_by_name("manzana")
 
     print("Then debería ver el mensaje 'No se encontraron productos'")
-    productos_page.verificar_mensaje_no_resultados()   
+    products_page.expect_no_results_message()   
