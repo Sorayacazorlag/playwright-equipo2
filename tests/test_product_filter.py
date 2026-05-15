@@ -1,16 +1,37 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
+from pages.products_page import ProductsPage
 
-def Filter_by_valid_name_price_and_category_values(page: Page):
-    page.goto("https://web-qa.dev.adalab.es/products")
-    page.get_by_role("searchbox", name="Nombre").fill("regadera")
-    page.get_by_label("CategoríaTodas las categorí").select_option("Herramientas")
-    page.get_by_role("spinbutton", name="Precio mínimo").fill("20")
-    page.get_by_role("spinbutton", name="Precio máximo").fill("25")
-    expect(page.get_by_role("region", name="Catálogo de productos").get_by_role("list")).to_be_visible()
+def test_filter_by_valid_name_price_and_category_values(page: Page):
+    products_page = ProductsPage(page)
+
+    print("Given: La usuaria abre la página de productos | Vida Verde")
+    products_page.open_products_page()
+
+    print("When: La usuaria filtra por nombre 'Regadera'")
+    products_page.filter_by_name("Regadera") 
+
+    print("And filtra por categoría 'Herramientas'")  
+    products_page.filter_by_category("Herramientas")
+
+    print("And filtra por precio mínimo '20'")
+    products_page.filter_by_min_price("20")
+
+    print("And filtrar por precio máximo '25'")
+    products_page.filter_by_max_price("25")
+  
+    print("Then debe ver el producto 'Regadera Metálica'")
+    products_page.verify_products_name("Regadera Metálica")
 
 
 
-def Filter_by_a_value_with_no_results(page: Page):
-    page.goto("https://web-qa.dev.adalab.es/products")
-    page.get_by_role("searchbox", name="Nombre").fill("manzana")
-    expect(page.get_by_text("No se encontraron productos")).to_be_visible()
+def test_filter_by_a_value_with_no_results(page: Page):
+    products_page = ProductsPage(page)
+
+    print("Given la usuaria entra en la página de productos")
+    products_page.open_products_page()
+
+    print("When filtra por el nombre 'manzana'")
+    products_page.filter_by_name("manzana")
+
+    print("Then debería ver el mensaje 'No se encontraron productos'")
+    products_page.expect_no_results_message()   
