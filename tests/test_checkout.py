@@ -17,6 +17,12 @@ def test_successful_purchase_with_valid_data(page: Page):
     print ("the user visit the cart page")
     page.get_by_role("link", name="Finalizar Compra").click()
 
+    print ("verify order sumary prices")
+    page.get_by_label("Resumen del Pedido").get_by_text("14.75 €").click()
+    page.get_by_text("IVA (21%)3.10 €").click()
+    page.get_by_text("5.00 €").click()
+    page.get_by_text("22.85 €").click()
+
     print ("proceed to payment")
     page.get_by_role("link", name="Proceder al Pago").click()
 
