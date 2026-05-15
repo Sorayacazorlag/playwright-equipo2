@@ -1,6 +1,5 @@
 from playwright.sync_api import Page, expect
 
-
 class ContactPage:
 
     def __init__(self, page: Page):
@@ -8,25 +7,23 @@ class ContactPage:
         self.url = "https://web-qa.dev.adalab.es/contact"
         self.title = "Contáctanos"
 
-    
-
     def open_contact_page(self):
         self.page.goto(self.url)
 
     def fill_contact_name(self, name):
-        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
+        self.page.get_by_role("textbox", name="Nombre *").fill(name)
 
     def fill_contact_email(self, email):
-        self.page.get_by_role("textbox", name="Email" *"").fill(email)
+        self.page.get_by_role("textbox", name="Email *").fill(email)
 
     def fill_contact_message(self, mensaje):
-        self.page.get_by_role("textbox", name="Mensaje" *"").fill(mensaje)
+        self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
 
     def press_send_contact(self):
-        self.page.get_by_role("button", name="Enviar Mensaje" *"").click()
+        self.page.get_by_role("button", name="Enviar Mensaje").click()
 
     def verify_message_form(self, text):
-        expect(self.page.get_by_role("heading", name=text *"")).to_be_visible()
+        expect(self.page.get_by_text(text)).to_be_visible()
 
     def verify_contact_title(self):
         expect(self.page.locator("h1")).to_contain_text(self.title)
@@ -35,44 +32,3 @@ class ContactPage:
         expect(self.page).to_have_url(self.url)
 
 
-def test_form_with_required_email_field_left_empty(page: Page):
-
-    
-    def open_contact_page(self):
-        self.page.goto(self.url)
-
-    def fill_contact_name(self, name):
-        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
-
-    def fill_contact_message(self, mensaje):    
-        self.page.get_by_role("textbox", name="Mensaje *").fill(mensaje)
-
-
-    def press_send_contact(self):
-        self.page.get_by_role("button", name="Enviar Mensaje").click()
-
-    def verify_message_form(self,text):
-        expect(self.page.get_by_role ("heading", name=text)).to_be_visible
-
-
-def test_submit_form_empty_required_message(page: Page):
-
-    def open_contact_page(self):
-        self.page.goto(self.url)
-
-    def fill_contact_name(self, name):
-        self.page.get_by_role("textbox", name="Nombre" *"").fill(name)
-    
-    def fill_contact_email(self, email):
-        self.page.get_by_role("textbox", name="Email *").fill(email) 
-
-    def press_send_contact(self):
-        self.page.get_by_role("button", name="Enviar Mensaje").click()
-
-    def see_message_form(self,text):
-        expect(self.page.get_by_role("button",text)).to_be_visible()
-
-
-
-
-    
