@@ -1,14 +1,10 @@
 from playwright.sync_api import Page, expect
 
-from pages.checkout_page import CheckoutPage
-
 
 def test_successful_purchase_with_valid_data(page: Page): #Teresa
 
-    checkout_page = CheckoutPage(page)
-
     print("Given user visit products page")
-    checkout_page.visit_products_page()
+    page.goto("https://web-qa.dev.adalab.es/products")
 
     print ("the user fills the valid field")
     page.get_by_role("searchbox", name="Nombre").fill("maceta")
