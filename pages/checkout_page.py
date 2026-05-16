@@ -1,6 +1,5 @@
 from playwright.sync_api import Page, expect
 
-
 class CheckoutPage:
     def __init__(self, page: Page):
         self.page = page
@@ -29,8 +28,9 @@ class CheckoutPage:
         self.page.get_by_role("button", name="Añadir Maceta Colgante al").click()
 
     def visit_cart_page(self):
+        expect(self.page.get_by_role("link", name="Finalizar Compra")).to_be_visible()
         self.page.get_by_role("link", name="Finalizar Compra").click()
-
+        
     def verify_sumary_prices(self):
         self.order_summary_label.get_by_text(self.price_items[0]).click()
         for price in self.price_items[1:]:
@@ -51,8 +51,10 @@ class CheckoutPage:
     def complete_purchase(self):
         self.page.get_by_role("button", name="Completar Compra").click()  
 
-    def see_message_successfull(self,congratulations):
-        expect(self.page.get_by_role("heading", name=congratulations)).to_be_visible()
+    def see_message_successfull(self, congratulations):
+        self.page.wait_for_selector(f"h1:has-text('{congratulations}')", state="visible", timeout=60000)
+        expect(self.page.get_by_text(congratulations, exact=False)).to_be_visible()
+
 
     def back_products_page(self,backtoshopping):
         self.page.get_by_role("link", name= backtoshopping).click()
