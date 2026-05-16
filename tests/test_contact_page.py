@@ -58,7 +58,6 @@ def test_form_with_required_email_field_left_empty(page: Page):   #Teresa
     
     print("Press send form button")
     page.get_by_role("button", name="Enviar Mensaje").click()
-    page.pause()
     
     print("Then an error message is displayed")
     expect(page.get_by_text("El email es obligatorio")).to_be_visible()
