@@ -1,28 +1,33 @@
 from playwright.sync_api import Page, expect
-
+from pages.checkout_page import CheckoutPage
+from pages.products_page import ProductsPage
+from pages.cart_page import CartPage
 
 def test_successful_purchase_with_valid_data(page: Page): #Teresa
 
+    checkout_page = CheckoutPage(page)
+
     print("Given user open products page")
-    page.goto("https://web-qa.dev.adalab.es/products")
+    checkout_page.open_products_page()
 
     print ("When user filter by name maceta colgante")
-    page.get_by_role("searchbox", name="Nombre").fill("maceta colgante")
-
+    checkout_page.filter_by_name_maceta_colgante("maceta colgante")
+    
     print ("then user add maceta colgante to the cart")
-    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
+    checkout_page.add_maceta_colgante_to_cart()
 
     print ("and the user visit the cart page")
-    page.get_by_role("link", name="Finalizar Compra").click()
-
+    checkout_page.visit_cart_page()
+    
     print ("verify order sumary prices")
-    page.get_by_label("Resumen del Pedido").get_by_text("14.75 €").click()
-    page.get_by_text("IVA (21%)3.10 €").click()
-    page.get_by_text("5.00 €").click()
-    page.get_by_text("22.85 €").click()
+    checkout_page.verify_checkout_price("14.75 €")
+    checkout_page.verify_at_amount("IVA (21%)3.10 €")
+    checkout_page.verify_shipping_cost("5.00 €")
+    checkout_page.verify_total_amount("22.85 €")
 
     print ("and proceed to payment")
-    page.get_by_role("link", name="Proceder al Pago").click()
+    checkout_page.proceed_payment()
+
 
     print ("and fill complete name")
     page.get_by_role("textbox", name="Nombre Completo").fill("maria garcia")
