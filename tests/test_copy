@@ -14,6 +14,9 @@ def test_successful_purchase_with_valid_data(page: Page): #Teresa
     print ("the user add maceta colgante to the cart")
     page.get_by_role("button", name="Añadir Maceta Colgante al").click()
 
+    print ("verify maceta colgante")
+    expect(page.get_by_role("button", name="añadir maceta colgante")).to_be_visible()
+
     print ("the user visit the cart page")
     page.get_by_role("link", name="Finalizar Compra").click()
 
@@ -122,4 +125,10 @@ def test_purchase_attemp_with_empty_credit_card(page:Page): #Teresa
     print ("message that is mandatory a credit card number")
     expect(page.get_by_role("textbox", name="Número de Tarjeta de Crédito *")).to_be_visible()
     page.get_by_role("button", name="Completar Compra").click()
+
+
+
+
+
+
 
