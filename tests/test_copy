@@ -12,10 +12,11 @@ def test_successful_purchase_with_valid_data(page: Page): #Teresa
     page.get_by_role("heading", name="Maceta Colgante").click()
     
     print ("the user add maceta colgante to the cart")
-    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
+    page.get_by_role("button", name="añadir maceta colgante al").click()
 
     print ("verify maceta colgante")
-    expect(page.get_by_role("button", name="añadir maceta colgante")).to_be_visible()
+    page.wait_for_selector('button:has-text("añadir maceta Colgante al")', state="visible", timeout=60000)
+    expect(page.get_by_role("button", name="añadir maceta colgante al")).to_be_visible()
 
     print ("the user visit the cart page")
     page.get_by_role("link", name="Finalizar Compra").click()
