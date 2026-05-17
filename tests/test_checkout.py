@@ -1,9 +1,15 @@
 from playwright.sync_api import Page, expect
 from pages.checkout_page import CheckoutPage
+from pages.product_filter import ProductFilterPage
+from pages.cart_page import CartPage
+
 
 def test_successful_purchase_with_valid_data(page: Page): #Teresa
 
     checkout_page = CheckoutPage(page) 
+    cart_page = CartPage(page)
+    product_filter_page = ProductFilterPage(page)
+    
 
     print("Given user visit products page")
     checkout_page.open_products_page()
