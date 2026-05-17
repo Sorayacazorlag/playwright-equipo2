@@ -16,8 +16,8 @@ def test_successful_purchase_with_valid_data(page: Page): #Teresa
     print ("the user fills valid name")
     checkout_page.fill_valid_name("maceta")
     
-    print ("the user choose maceta colgante")
-    checkout_page.add_product()
+    print ("the user add maceta colgante to the cart")
+    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
 
     print ("verify maceta colgante")
     expect(page.get_by_role("button", name="Añadir Maceta Colgante al")).to_be_visible()
