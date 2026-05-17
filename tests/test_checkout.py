@@ -4,7 +4,7 @@ from playwright.sync_api import Page, expect
 def test_successful_purchase_with_valid_data(page: Page): #Teresa
 
     print("Given user visit products page")
-    checkout_page.open_contact_page()
+    checkout_page.open_products_page()
 
     print ("the user fills the valid field")
     page.get_by_role("searchbox", name="Nombre").fill("maceta")
