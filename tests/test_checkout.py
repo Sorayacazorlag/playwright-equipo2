@@ -10,8 +10,8 @@ def test_successful_purchase_with_valid_data(page: Page): #Teresa
     print("Given user open products page")
     checkout_page.open_products_page()
 
-    print ("When user filter by name maceta colgante")
-    checkout_page.filter_by_name_maceta_colgante("maceta colgante")
+    print ("When user filter by category")
+    checkout_page.filter_by_category("maceta colgante")
     
     print ("then user add maceta colgante to the cart")
     checkout_page.add_maceta_colgante_to_cart()
