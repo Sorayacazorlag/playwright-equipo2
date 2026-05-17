@@ -9,7 +9,6 @@ def test_successful_purchase_with_valid_data(page: Page): #Teresa
     checkout_page = CheckoutPage(page) 
     cart_page = CartPage(page)
     product_filter_page = ProductFilterPage(page)
-    
 
     print("Given user visit products page")
     checkout_page.open_products_page()

@@ -10,3 +10,7 @@ class CheckoutPage():
     def open_products_page(self):
         self.page.goto(self.url)
 
+    def fill_valid_name(self,name):
+        self.page.get_by_role("searchbox", name="Nombre").fill(name)
+
+        
