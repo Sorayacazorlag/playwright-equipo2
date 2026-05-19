@@ -31,8 +31,9 @@ class CheckoutPage():
     def fill_invalid_credit_card(self,invalidcard):
         self.page.get_by_role("textbox", name="Número de Tarjeta de Crédito *").fill(invalidcard)
 
-    def verify_creditcard_information(self,invalidmessage):
+    def verify_error_message(self,invalidmessage):
         expect(self.page.get_by_text(invalidmessage)).to_be_visible()
 
     def verify_complete_creditcard(self,emptyfield):
         expect(self.page.get_by_role("textbox", name=emptyfield)).to_be_visible()
+        

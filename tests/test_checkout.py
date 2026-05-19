@@ -120,11 +120,11 @@ def  test_successful_purchase_with_invalid_data(page: Page): #Teresa
     checkout_page.complete_payment()
     
     print ("credit card information")
-    checkout_page.credit_card_information()
+    checkout_page.fill_invalid_credit_card()
 
-    print ("verify credit card information")
-    checkout_page.verify_creditcard_information("El número de tarjeta debe")
-    
+    print ("verify error message")
+    checkout_page.verify_error_message("El número de tarjeta debe")
+
     print ("back to cart")
     cart_page.open_cart_page()
     
