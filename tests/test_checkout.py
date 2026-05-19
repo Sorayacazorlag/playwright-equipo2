@@ -1,169 +1,177 @@
+from tabnanny import check
+
 from playwright.sync_api import Page, expect
+
+from pages.cart_page import CartPage
+from pages.confirmation_page import ConfirmationPage
+from pages.products_page import ProductsPage
+from pages.checkout_page import CheckoutPage
 
 
 def test_successful_purchase_with_valid_data(page: Page): #Teresa
 
+    products_page = ProductsPage(page)
+    cart_page = CartPage(page)
+    checkout_page = CheckoutPage(page)
+    confirmation_page = ConfirmationPage(page)
+
     print("Given user open products page")
-    page.goto("https://web-qa.dev.adalab.es/products")
+    products_page.open_products_page()
 
     print ("When user filter by name maceta colgante")
-    page.get_by_role("searchbox", name="Nombre").fill("maceta colgante")
+    products_page.filter_by_name("maceta colgante")
 
     print ("then user add maceta colgante to the cart")
-    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
+    products_page.add_product("Añadir Maceta Colgante")
 
     print ("and the user visit the cart page")
-    page.get_by_role("link", name="Finalizar Compra").click()
+    cart_page.open_cart_page()
 
     print ("verify order sumary prices")
-    page.get_by_label("Resumen del Pedido").get_by_text("14.75 €").click()
-    page.get_by_text("IVA (21%)3.10 €").click()
-    page.get_by_text("5.00 €").click()
-    page.get_by_text("22.85 €").click()
-
+    cart_page.verify_one_product_price("14.75 €")
+    cart_page.verify_vat("IVA (21%)3.10 €")
+    cart_page.verify_shipping("5.00 €")
+    cart_page.verify_total("22.85 €")
+   
     print ("and proceed to payment")
-    page.get_by_role("link", name="Proceder al Pago").click()
+    cart_page.procedd_to_payment()
 
     print ("and fill complete name")
-    page.get_by_role("textbox", name="Nombre Completo").fill("maria garcia")
+    checkout_page.fill_complete_name("maria garcia")
 
     print ("and fill valid email user ")
-    page.get_by_role("textbox", name="Email").fill("test@gmail.com")
-
+    checkout_page.fill_email("test@gmail.com")
+   
     print("and fill valid adress user")
-    page.get_by_role("textbox", name="Dirección").fill("parmenides,5,Malaga")
+    checkout_page.fill_adress("parmenides,5,Malaga")
 
     print ("add valid credit card number")
-    page.get_by_role("textbox", name="Número de Tarjeta de Crédito *").fill("4242 4242 4242 4242")
+    checkout_page.fill_credit_card("4242 4242 4242 4242")
 
-    print ("complete purchse")
-    page.get_by_role("button", name="Completar Compra").click()
-    expect(page.get_by_role("heading", name="¡Compra Realizada con Éxito!")).to_be_visible()
+    print ("complete purchase")
+    checkout_page.complete_payment()
 
+    print("Verify confirmation summary")
+    confirmation_page.verify_confirmation_message()
+
+    print("verify products appears")
+    confirmation_page.verify_product_name("Maceta Colgante")
+
+    print("verify product price")
+    confirmation_page.verify_product_price("Maceta Colgante14.75 €")
+    
+    print("verify product subototal")
+    confirmation_page.verify_product_subtotal("14.75 €")
+
+    print("verify IVA")
+    confirmation_page.verify_IVA("3.10 €")
+    
+    print("verify shipping")
+    confirmation_page.verify_shipping("5.00 €")
+
+    print("verify total price")
+    confirmation_page.verify_total("22.85 €")
+    
     print("back to products page")
-    page.get_by_role("link", name="Volver a la Tienda").click()
-
+    confirmation_page.click_back_to_product()
+    
+    print ("verify products page")
+    products_page.verify_products_url()
 
 
     # ---------------------
-def test_successful_purchase_with_invalid_data(page: Page): #Teresa
-    
-    print ("Given user visit products page")
-    page.goto("https://web-qa.dev.adalab.es/products")
+def  test_successful_purchase_with_invalid_data(page: Page): #Teresa
 
-    print ("the user fills the valid field")
-    page.get_by_role("searchbox", name="Nombre").fill("maceta")
+    products_page = ProductsPage(page)
+    cart_page = CartPage(page)
+    checkout_page = CheckoutPage(page)
+    confirmation_page = ConfirmationPage(page)
+
+
+    
+    print ("Given user visit checkout page")
+    products_page.open_products_page()
 
     print ("the user choose maceta colgante")
-    page.get_by_role("heading", name="Maceta Colgante").click()
-    
-    print ("the user add maceta colgante to the cart")
-    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
+    products_page.filter_by_name("Maceta Colgante")
 
+    print ("the user add maceta colgante to the cart")
+    products_page.add_product("Añadir Maceta Colgante al")
+    
     print ("the user visit the cart page")
-    page.get_by_role("link", name="Finalizar Compra").click()
+    cart_page.open_cart_page()
 
     print ("proceed to payment")
-    page.get_by_role("link", name="Proceder al Pago").click()
+    cart_page.procedd_to_payment()
 
     print ("fill complete name")
-    page.get_by_role("textbox", name="Nombre Completo *").fill("maria garcia")
-
+    checkout_page.fill_complete_name("maria garcia")
+    
     print ("fill valid email user ")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
-
+    checkout_page.fill_email("test@gmail.com")
+    
     print("fill valid adress user")
-    page.get_by_role("textbox", name="Dirección *").fill("parmenides,5,Malaga")
-
-    print ("fill invalid credit card number")
-    page.get_by_role("textbox", name="Número de Tarjeta de Crédito *").fill("1111 4242")
-
+    checkout_page.fill_adress("parmenides,5,Malaga")
+    
+    print ("fill invalid credit card 1111 4242")
+    checkout_page.fill_invalid_credit_card("1111 4242")
+    
     print("complete purchase")
-    page.get_by_role("button", name="Completar Compra").click()
-    expect(page.get_by_text("El número de tarjeta debe")).to_be_visible()
+    checkout_page.complete_payment()
+    
+    print ("credit card information")
+    checkout_page.fill_invalid_credit_card()
+
+    print ("verify error message")
+    checkout_page.verify_error_message("El número de tarjeta debe")
 
     print ("back to cart")
-    page.get_by_role("link", name="Volver al Carrito").click()
-
+    cart_page.open_cart_page()
+    
 
     # ---------------------
-def test_successful_purchase_with_invalid_data(page: Page): #Teresa
-    
-    print ("Given user visit products page")
-    page.goto("https://web-qa.dev.adalab.es/products")
-
-    print ("the user fills the valid field")
-    page.get_by_role("searchbox", name="Nombre").fill("maceta")
-
-    print ("the user choose maceta colgante")
-    page.get_by_role("heading", name="Maceta Colgante").click()
-    
-    print ("the user add maceta colgante to the cart")
-    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
-
-    print ("the user visit the cart page")
-    page.get_by_role("link", name="Finalizar Compra").click()
-
-    print ("proceed to payment")
-    page.get_by_role("link", name="Proceder al Pago").click()
-
-    print ("fill complete name")
-    page.get_by_role("textbox", name="Nombre Completo *").fill("maria garcia")
-
-    print ("fill valid email user ")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
-
-    print("fill valid adress user")
-    page.get_by_role("textbox", name="Dirección *").fill("parmenides,5,Malaga")
-
-    print ("fill invalid credit card number")
-    page.get_by_role("textbox", name="Número de Tarjeta de Crédito *").fill("1111 4242")
-
-    print("complete purchase")
-    page.get_by_role("button", name="Completar Compra").click()
-    expect(page.get_by_text("El número de tarjeta debe")).to_be_visible()
-
-    print ("back to cart")
-    page.get_by_role("link", name="Volver al Carrito").click()
-
 
 def test_purchase_attemp_with_empty_credit_card(page:Page): #Teresa
 
+    products_page = ProductsPage(page)
+    cart_page = CartPage(page)
+    checkout_page = CheckoutPage(page)
+    confirmation_page = ConfirmationPage(page)
+
+
     print ("Given user visit products page")
-    page.goto("https://web-qa.dev.adalab.es/products")
+    products_page.open_products_page()
 
     print ("the user fills the valid field")
-    page.get_by_role("searchbox", name="Nombre").fill("maceta")
-
-    print ("the user choose maceta colgante")
-    page.get_by_role("heading", name="Maceta Colgante").click()
+    products_page.filter_by_name("maceta")
     
     print ("the user add maceta colgante to the cart")
-    page.get_by_role("button", name="Añadir Maceta Colgante al").click()
-
+    products_page.add_product("Añadir Maceta Colgante al")
+    
     print ("the user visit the cart page")
-    page.get_by_role("link", name="Finalizar Compra").click()
+    cart_page.open_cart_page()
 
     print ("proceed to payment")
-    page.get_by_role("link", name="Proceder al Pago").click()
-
+    cart_page.procedd_to_payment()
+    
     print ("fill complete name")
-    page.get_by_role("textbox", name="Nombre Completo *").fill("maria garcia")
+    checkout_page.fill_complete_name("maria garcia")
 
     print ("fill valid email user ")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
+    checkout_page.fill_email("test@gmail.com")
 
     print("fill valid adress user")
-    page.get_by_role("textbox", name="Dirección *").fill("parmenides,5,Malaga")
-
+    checkout_page.fill_adress("parmenides,5,Malaga")
+    
     print("complete purchase")
-    page.get_by_role("button", name="Completar Compra").click()
-    expect(page.get_by_role("button", name="Completar Compra")).to_be_visible()
+    checkout_page.complete_payment()
 
     print ("message that is mandatory a credit card number")
-    expect(page.get_by_role("textbox", name="Número de Tarjeta de Crédito *")).to_be_visible()
-    page.get_by_role("button", name="Completar Compra").click()
+    checkout_page.verify_complete_creditcard("Número de Tarjeta de Crédito *")
 
+    print ("back to cart")
+    cart_page.open_cart_page()
+    
 
 
 

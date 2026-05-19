@@ -44,3 +44,5 @@ class CartPage:
     def empty_cart(self):
         self.page.get_by_role("button", name="Vaciar Carrito").click() 
     
+    def procedd_to_payment(self):
+        self.page.get_by_role("link", name="Proceder al Pago").click()
