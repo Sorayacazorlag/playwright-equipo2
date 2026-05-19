@@ -36,9 +36,25 @@ def test_successful_purchase_with_valid_data(page: Page): #Teresa
     print ("add valid credit card number")
     page.get_by_role("textbox", name="Número de Tarjeta de Crédito *").fill("4242 4242 4242 4242")
 
-    print ("complete purchse")
+    print ("complete purchase")
     page.get_by_role("button", name="Completar Compra").click()
     expect(page.get_by_role("heading", name="¡Compra Realizada con Éxito!")).to_be_visible()
+
+    print("Verify confirmation summary")
+
+    print("verify products appears")
+    expect(page.get_by_text("Maceta colgante")).to_be_visible()
+
+    print("verify product price")
+    expect(page.get_by_role("listitem").filter(has_text="Maceta Colgante14.75 €").locator("data")).to_be_visible()
+
+    print("verify product subototal")
+    expect(page.get_by_role("definition").filter(has_text="14.75 €").locator("data")).to_be_visible()
+
+    print("verify IVA")
+    expect(page.get_by_text("3.10 €")).to_be_visible()
+    expect(page.get_by_text("5.00 €")).to_be_visible()
+    expect(page.get_by_text("22.85 €")).to_be_visible()
 
     print("back to products page")
     page.get_by_role("link", name="Volver a la Tienda").click()
