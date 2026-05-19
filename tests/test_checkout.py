@@ -113,7 +113,7 @@ def  test_successful_purchase_with_invalid_data(page: Page): #Teresa
     print("fill valid adress user")
     checkout_page.fill_adress("parmenides,5,Malaga")
     
-    print ("fill invalid credit card number")
+    print ("fill invalid credit card number 1111 4242")
     checkout_page.fill_invalid_credit_card("1111 4242")
     
     print("complete purchase")
